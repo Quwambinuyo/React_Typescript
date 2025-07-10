@@ -14,7 +14,7 @@ const App = () => {
   let isAwesome: boolean = true;
   isAwesome = false;
   console.log(isAwesome);
-  // isAwesome = 'shake and bake' //
+  // isAwesome = 'shake and bake'
 
   // Arithmetic between two numbers
   let isNumber1: number = 10;
@@ -76,7 +76,6 @@ const App = () => {
   console.log(orderStatus, discount);
 
   // Arrays and Objects in TypeScript
-
   // An array of numbers
   let prices: number[] = [100, 75, 42];
   console.log(prices);
@@ -291,8 +290,8 @@ const App = () => {
     return { id, isActive: id % 2 === 0 };
   }
 
-  const first = createEmployee({ id: 1 }); // { id: 1, isActive: false }
-  const second = createEmployee({ id: 2 }); // { id: 2, isActive: true }
+  const first = createEmployee({ id: 1 });
+  const second = createEmployee({ id: 2 });
 
   console.log(first, second);
 
@@ -312,7 +311,7 @@ const App = () => {
   };
 
   // Will log the message but returns undefined (because return type is void)
-  console.log(createStudent(newStudent)); // Logs: Welcome to the course ANNA!!!, then undefined
+  console.log(createStudent(newStudent));
 
   // Uncommenting the line below would work fine, even with extra props like `email`
   // as long as the required ones (`id` and `name`) are present.
@@ -328,7 +327,7 @@ const App = () => {
     config: { reverse: boolean } = { reverse: false }
   ): string | number {
     if (typeof input === "number") {
-      return input * input; // Square the number
+      return input * input;
     } else {
       // If reverse is true, reverse the uppercase string
       return config.reverse
