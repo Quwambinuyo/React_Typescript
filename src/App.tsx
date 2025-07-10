@@ -266,7 +266,7 @@ const App = () => {
   // Union Types and Type Narrowing
   // ===============================
 
-  // Accepts either a string or number and processes accordingly
+  // challenge || Accepts either a string or number and processes accordingly
   function processInput(input: string | number) {
     if (typeof input === "number") {
       console.log(input * 2);
@@ -277,6 +277,69 @@ const App = () => {
 
   processInput(10);
   processInput("Hello");
+
+  // ===============================
+  // Objects as Parameters in Functions
+  // ===============================
+
+  // Function that accepts an object with an `id` property and returns an object with `id` and `isActive`
+  // If the `id` is even, `isActive` is true; otherwise false
+  function createEmployee({ id }: { id: number }): {
+    id: number;
+    isActive: boolean;
+  } {
+    return { id, isActive: id % 2 === 0 };
+  }
+
+  const first = createEmployee({ id: 1 }); // { id: 1, isActive: false }
+  const second = createEmployee({ id: 2 }); // { id: 2, isActive: true }
+
+  console.log(first, second);
+
+  // ===============================
+  // Alternative Object Handling in Functions
+  // ===============================
+
+  // Function that takes a student object with `id` and `name`
+  // Logs a welcome message (in uppercase) to the console
+  function createStudent(student: { id: number; name: string }): void {
+    console.log(`Welcome to the course ${student.name.toUpperCase()}!!!`);
+  }
+
+  const newStudent = {
+    id: 5,
+    name: "anna",
+  };
+
+  // Will log the message but returns undefined (because return type is void)
+  console.log(createStudent(newStudent)); // Logs: Welcome to the course ANNA!!!, then undefined
+
+  // Uncommenting the line below would work fine, even with extra props like `email`
+  // as long as the required ones (`id` and `name`) are present.
+  // console.log(createStudent({id:1, name: 'bob', email:'bobo@gmail.com'}));
+
+  // ===============================
+  // Challenge: Process Data Function
+  // ===============================
+
+  // Function to process a number or string input
+  function processData(
+    input: number | string,
+    config: { reverse: boolean } = { reverse: false }
+  ): string | number {
+    if (typeof input === "number") {
+      return input * input; // Square the number
+    } else {
+      // If reverse is true, reverse the uppercase string
+      return config.reverse
+        ? input.toUpperCase().split("").reverse().join("")
+        : input.toUpperCase();
+    }
+  }
+
+  console.log(processData(6));
+  console.log(processData("Bode"));
+  console.log(processData("Bode", { reverse: true }));
 
   return <div>App</div>;
 };
