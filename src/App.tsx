@@ -31,8 +31,7 @@ const App = () => {
   // Comparison with boolean result
   let isNum1 = 10;
   let isNum2 = 20;
-  let isBool: boolean = true;
-  isBool = isNum1 < isNum2;
+  let isBool: boolean = isNum1 < isNum2;
   console.log(isBool);
 
   // Union type (can be a number or string)
@@ -75,6 +74,209 @@ const App = () => {
   let orderStatus: "processing" | "shipped" | "delivered" = "processing";
   orderStatus = "shipped";
   console.log(orderStatus, discount);
+
+  // Arrays and Objects in TypeScript
+
+  // An array of numbers
+  let prices: number[] = [100, 75, 42];
+  console.log(prices);
+
+  // An array of strings
+  let fruits: string[] = ["apple", "banana", "cashew"];
+  console.log(fruits);
+
+  // An array of any type values (not recommended unless necessary)
+  let emptyValues1: any[] = ["hello", 100];
+  console.log(emptyValues1);
+
+  // An array with mixed types using union types
+  let names = ["peter", "susan", 7, true]; // inferred as (string | number | boolean)[]
+  let array: (string | number | boolean)[] = ["peter", "susan", 7, true];
+  console.log(names, array);
+
+  // Only numbers allowed in this array
+  let temperatures: number[] = [20, 25, 30];
+  // temperatures.push('hot') ❌ Invalid: 'hot' is a string
+  console.log(temperatures);
+
+  // Only strings allowed in this array
+  let colors: string[] = ["red", "green", "blue"];
+  // colors.push(true) ❌ Invalid: true is a boolean
+  console.log(colors);
+
+  // Mixed array with numbers and strings
+  let mixedArray: (string | number)[] = [1, 2, 3, "four"];
+  console.log(mixedArray);
+
+  // An object with `brand` (string) and `year` (number)
+  let car: { brand: string; year: number } = { brand: "Toyota", year: 2020 };
+  car.brand = "Ford"; // ✅ Valid update
+  // car.color = 'black' ❌ Invalid: `color` is not defined in the type
+
+  // Another object of the same structure
+  let car1: { brand: string; year: number } = { brand: "Audi", year: 2022 };
+
+  // Objects for array of items
+  let book = { title: "book", cost: 20 };
+  let pen = { title: "pen", cost: 10 };
+  let notebook = { title: "notebook" }; // cost is optional
+  console.log(car1);
+
+  // Array of objects with readonly `title` and optional `cost`
+  let items: { readonly title: string; cost?: number }[] = [
+    book,
+    pen,
+    notebook,
+  ];
+  // items[0].title = 'new book' ❌ Invalid: title is readonly
+  console.log(items);
+
+  // Object representing a bike
+  let bike: { brand: string; year: number } = { brand: "yamaha", year: 2024 };
+  // bike.year = 'old' ❌ Invalid: 'old' is not a number
+  console.log(bike);
+
+  // Another object for a laptop
+  let laptop: { brand: string; year: number } = { brand: "Dell", year: 2023 };
+  // laptop.brand = 4 ❌ Invalid: must be a string
+  // let laptop2: { brand: string; year: number } = { brand: "HP" }; ❌ year missing
+  console.log(laptop);
+
+  // Objects with optional price field
+  let product1 = { title: "shirt", price: 20 };
+  let product2 = { title: "short" }; // price is optional
+
+  // Array of product objects with optional `price`
+  let products: { title: string; price?: number }[] = [product1, product2];
+  // products.push({ title: 'shoes', price: true }) ❌ Invalid: true is not a number
+  console.log(products);
+
+  // Functions params and function returns
+  // any - you can use any to get rid of the error
+  // config - you can do the same by making changes to  your config file
+  // type
+  function sayHi(name: string) {
+    console.log(`Hello there ${name.toUpperCase()}`);
+  }
+
+  sayHi("John");
+
+  // Function return
+  function calculateDiscount(price: number): number {
+    const hasDiscount = true;
+    if (hasDiscount) {
+      return price;
+      // this throw an error if my function does have a number as a type
+      // return 'Discount Applied'
+    }
+    return price * 0.9;
+  }
+
+  const finalPrice = calculateDiscount(200);
+  console.log(finalPrice);
+
+  // A simple function that adds 3 to the provided number
+  function addThree(number: any) {
+    let anotherNumber: number = 3;
+    return number + anotherNumber;
+  }
+
+  const result = addThree(3);
+  const someValue = result;
+  console.log(someValue); // Output: 6
+
+  // ===============================
+  // Challenge: Check if name exists in array
+  // ===============================
+  const namesChallenge: string[] = ["John", "Jane", "Jim", "Jill"];
+
+  // Function to check if a name exists in the namesChallenge array
+  function isNameInList(name: string) {
+    return namesChallenge.includes(name);
+  }
+
+  let nameToCheck = "Jill";
+
+  // Conditional logging based on the result
+  if (isNameInList(nameToCheck)) {
+    console.log(`${nameToCheck} is in the list`);
+  } else {
+    console.log(`${nameToCheck} is not in the list`);
+  }
+
+  // ===============================
+  // Optional Parameters in TypeScript
+  // ===============================
+
+  // `discount` is optional and defaults to 0 if not provided
+  function calculatePrice(price: number, discount?: number): number {
+    return price - (discount || 0);
+  }
+
+  let priceAfterDiscount = calculatePrice(100, 20);
+  console.log(priceAfterDiscount);
+
+  // ===============================
+  // Default Parameters in TypeScript
+  // ===============================
+
+  // `penaltyPoint` defaults to 0 if not passed
+  function calculateScore(
+    initialScore: number,
+    penaltyPoint: number = 0
+  ): number {
+    return initialScore - penaltyPoint;
+  }
+
+  let scoreAfterPenalty = calculateScore(40, 10);
+  let scoreWithoutPenalty = calculateScore(400);
+
+  console.log(scoreWithoutPenalty);
+  console.log(scoreAfterPenalty);
+
+  // ===============================
+  // Rest Parameters in TypeScript
+  // ===============================
+
+  // Accepts multiple numbers, doubles them, sums them, and returns with a message
+  function sum(message: string, ...numbers: number[]): string {
+    const doubled = numbers.map((num) => num * 2);
+    console.log(doubled);
+    let total = numbers.reduce((prev, curr) => {
+      return prev + curr;
+    }, 0);
+
+    return `${message} ${total}`;
+  }
+
+  let resultSum = sum("The total is : ", 1, 2, 3, 4, 5);
+  console.log(resultSum);
+
+  // ===============================
+  // Simple Logger Function
+  // ===============================
+
+  function logMessage(message: string) {
+    console.log(message);
+  }
+
+  logMessage(`Hello, Typescript`);
+
+  // ===============================
+  // Union Types and Type Narrowing
+  // ===============================
+
+  // Accepts either a string or number and processes accordingly
+  function processInput(input: string | number) {
+    if (typeof input === "number") {
+      console.log(input * 2);
+    } else {
+      console.log(input.toUpperCase());
+    }
+  }
+
+  processInput(10);
+  processInput("Hello");
 
   return <div>App</div>;
 };
