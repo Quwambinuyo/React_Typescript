@@ -424,6 +424,93 @@ const App = () => {
   printStaffDetails(alice);
   printStaffDetails(bob);
 
+  /// ===============================
+  // Intersection Type with a Union
+  // ===============================
+
+  // Define a base type for Book
+  type Book = {
+    id: number;
+    name: string;
+    price: number;
+  };
+
+  // Create two book objects of type Book
+  const book1: Book = {
+    id: 1,
+    name: "How to cook a dragon",
+    price: 15,
+  };
+
+  const book2: Book = {
+    id: 1,
+    name: "the secret life of unicorns",
+    price: 18,
+  };
+
+  // Intersection type: Book & { discount: number }
+  // This means the object must have all properties from both Book AND the discount
+  const discountedBook: Book & { discount: number } = {
+    id: 3,
+    name: "Gnomes vs. Goblins: The ultimate Guide",
+    price: 25,
+    discount: 0.5,
+  };
+
+  // Print all the book objects
+  console.log(discountedBook, book1, book2);
+
+  // ===============================
+  // Index Signature (Dynamic Property Names)
+  // ===============================
+
+  // Define a property name using a variable
+  const propName = "age";
+
+  // Define a type where the key is a string literal value ('age') and the value is a number
+  type Animal = {
+    [propName]: number;
+  };
+
+  // Create an animal object using dynamic key assignment
+  let tiger: Animal = { [propName]: 5 }; // Equivalent to { age: 5 }
+
+  console.log(tiger); // Output: { age: 5 }
+
+  // ===============================
+  // Union Type Example
+  // ===============================
+
+  // Define a type that can either be a string or number
+  type StringOrNumber = string | number;
+
+  let value: StringOrNumber;
+
+  value = "Hello";
+  value = 123;
+  console.log(value);
+
+  // ===============================
+  // Literal Type Example
+  // ===============================
+
+  // Define a type that allows only two string values: "light" or "dark"
+  type Theme = "light" | "dark";
+
+  let theme: Theme;
+
+  theme = "dark";
+  theme = "light";
+
+  console.log(theme);
+
+  // Function that sets the theme using the Theme literal type
+  function setTheme(t: Theme) {
+    theme = t;
+  }
+
+  setTheme("dark");
+
   return <div>App</div>;
 };
 
