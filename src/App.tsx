@@ -340,6 +340,42 @@ const App = () => {
   console.log(processData("Bode"));
   console.log(processData("Bode", { reverse: true }));
 
+  // ===============================
+  // Type Alias and User Creation Example
+  // ===============================
+
+  // Define a type alias `User` representing the structure of a user object
+  type User = {
+    id: number;
+    name: string;
+    isActive: boolean;
+  };
+
+  const john = {
+    id: 1,
+    name: "John",
+    isActive: true,
+  };
+
+  const susan = {
+    id: 1,
+    name: "Susan",
+    isActive: false,
+  };
+
+  // Function that accepts a `User` object and returns a new `User` object
+  function createUser(user: User): User {
+    console.log(`Hello there ${user.name.toUpperCase()}`);
+    return {
+      id: user.id,
+      name: String(user.name),
+      isActive: user.isActive,
+    };
+  }
+
+  // Call the function with different users
+  createUser(john);
+  createUser(susan);
   return <div>App</div>;
 };
 
