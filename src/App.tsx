@@ -532,6 +532,8 @@ const App = () => {
 
     // Method that takes a message and returns a string combining it with the title
     printTitle(message: string): string;
+
+    printSomething: (someValue: number) => number;
   }
 
   // Create an object `deepWork` that implements the `BookInterface`
@@ -550,6 +552,34 @@ const App = () => {
     printTitle(message) {
       return `${this.title} ${message}`;
     },
+
+    // Implementation of printSomething as required by the interface
+    //first option
+
+    printSomething: function (someValue: number) {
+      return someValue;
+    },
+
+    //second option
+    /** 
+    printSomething: (someValue) => {
+      console.log(deepWork.author);
+
+      return someValue;
+    },
+    */
+    //third option
+    /** 
+    printSomething(someValue) {
+      return someValue;
+    },
+    */
+    /**
+    // fourth option
+    printAuthor: () => {
+      console.log(deepWork.author);
+    },
+     */
   };
 
   // Call the `printAuthor()` method to log the author's name
@@ -558,7 +588,54 @@ const App = () => {
   const resultTitle = deepWork.printTitle("is an Interesting book");
 
   // Log the returned string from `printTitle()`
+
   console.log(resultTitle);
+  // Log the returned number from `printSomething()`
+  console.log(deepWork.printSomething(34));
+  deepWork.printAuthor();
+
+  // ===============================
+  // Challenge: Interface with Optional and Readonly Properties
+  // ===============================
+
+  // Define the Computer interface
+  interface Computer {
+    // `id` is readonly — it can't be changed after object creation
+    readonly id: number;
+
+    // Required properties
+    brand: string;
+    ram: number;
+
+    // Method to upgrade the RAM and return the new RAM value
+    upgradeRam(increase: number): number;
+
+    // Optional storage property
+    storage?: number;
+  }
+
+  // Create an object `laptopInterface` based on the Computer interface
+  const laptopInterface: Computer = {
+    id: 1,
+    brand: "random brand",
+    ram: 8,
+
+    // Implement the `upgradeRam` method
+    upgradeRam(amount) {
+      // Increase the current RAM by the amount passed
+      this.ram += amount;
+      return this.ram;
+    },
+  };
+
+  // Add storage property after object creation (optional property)
+  laptopInterface.storage = 256;
+
+  // Upgrade the RAM by 4 and log the new RAM value
+  console.log(laptopInterface.upgradeRam(4)); // Output: 12
+
+  // Log the entire object to see updated values
+  console.log(laptopInterface);
 
   return <div>App</div>;
 };
