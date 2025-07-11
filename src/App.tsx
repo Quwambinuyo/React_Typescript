@@ -373,9 +373,57 @@ const App = () => {
     };
   }
 
-  // Call the function with different users
   createUser(john);
   createUser(susan);
+
+  // ===============================
+  // Challenge: Union Types and Type Narrowing
+  // ===============================
+
+  // Define a type for an individual employee
+  type Employee = {
+    id: number;
+    name: string;
+    department: string;
+  };
+
+  // Define a type for a manager who manages multiple employees
+  type Manager = {
+    id: number;
+    name: string;
+    employees: Employee[];
+  };
+
+  // `Staff` can be either an Employee or a Manager
+  type Staff = Employee | Manager;
+
+  // Function that prints details based on whether the staff is an Employee or Manager
+  function printStaffDetails(staff: Staff): void {
+    // Use type narrowing with the `in` operator to check if 'employees' exists
+    if ("employees" in staff) {
+      // If true, the staff is a Manager
+      console.log(
+        `${staff.name} is a manager with ${staff.employees.length} employees.`
+      );
+    } else {
+      // Otherwise, the staff is a regular Employee
+      console.log(
+        `${staff.name} is an employee in the ${staff.department} department`
+      );
+    }
+  }
+
+  // Create some sample employees
+  const alice: Employee = { id: 1, name: "alice", department: "Sales" };
+  const steve: Employee = { id: 1, name: "steve", department: "HR" };
+
+  // Create a manager who supervises the above employees
+  const bob: Manager = { id: 1, name: "bob", employees: [alice, steve] };
+
+  // Call the function to print details for an employee and a manager
+  printStaffDetails(alice);
+  printStaffDetails(bob);
+
   return <div>App</div>;
 };
 
