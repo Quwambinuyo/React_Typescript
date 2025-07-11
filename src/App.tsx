@@ -511,6 +511,55 @@ const App = () => {
 
   setTheme("dark");
 
+  // ===============================
+  // Interface Fundamentals
+  // ===============================
+
+  // Define a `BookInterface` to describe the structure of a book object
+  interface BookInterface {
+    // `isbn` is read-only and cannot be changed after initialization
+    readonly isbn: number;
+
+    // Required string properties
+    title: string;
+    author: string;
+
+    // Optional property (may or may not be included)
+    genre?: string;
+
+    // Method to print the author's name
+    printAuthor(): void;
+
+    // Method that takes a message and returns a string combining it with the title
+    printTitle(message: string): string;
+  }
+
+  // Create an object `deepWork` that implements the `BookInterface`
+  const deepWork: BookInterface = {
+    isbn: 123,
+    title: "deep work",
+    author: "cal newport",
+    genre: "self-help",
+
+    // Method implementation to print the author
+    printAuthor() {
+      console.log(this.author);
+    },
+
+    // Method implementation to print the title with a custom message
+    printTitle(message) {
+      return `${this.title} ${message}`;
+    },
+  };
+
+  // Call the `printAuthor()` method to log the author's name
+  deepWork.printAuthor();
+  // Call the `printTitle()` method with a message and store the result
+  const resultTitle = deepWork.printTitle("is an Interesting book");
+
+  // Log the returned string from `printTitle()`
+  console.log(resultTitle);
+
   return <div>App</div>;
 };
 
