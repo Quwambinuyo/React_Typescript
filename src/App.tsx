@@ -3,53 +3,53 @@ const App = () => {
   let awesomeName: string = "Shake and Bake";
   awesomeName = "something";
   awesomeName = awesomeName.toUpperCase();
-  console.log(awesomeName);
+  // console.log(awesomeName);
   // awesomeName = 20;
 
   // Number variable and basic arithmetic
   let amount: number = 20;
   amount = 12 - 5;
-  console.log(amount);
+  // console.log(amount);
   // Boolean variable example
   let isAwesome: boolean = true;
   isAwesome = false;
-  console.log(isAwesome);
+  // console.log(isAwesome);
   // isAwesome = 'shake and bake'
 
   // Arithmetic between two numbers
   let isNumber1: number = 10;
   let isNubmber2: number = 40;
   let isNumber3: number = isNubmber2 / isNumber1;
-  console.log(isNumber3);
+  // console.log(isNumber3);
   // Working with string methods
   let isString1: string = "Hello ";
   let isString2: string = "World";
-  console.log(isString1.length);
-  console.log(isString2.charAt(0));
-  console.log(isString2.indexOf("o"));
+  // console.log(isString1.length);
+  // console.log(isString2.charAt(0));
+  // console.log(isString2.indexOf("o"));
 
   // Comparison with boolean result
   let isNum1 = 10;
   let isNum2 = 20;
   let isBool: boolean = isNum1 < isNum2;
-  console.log(isBool);
+  // console.log(isBool);
 
   // Union type (can be a number or string)
   let tax: number | string = 10;
   tax = 100;
   tax = "$100";
-  console.log(tax);
+  // console.log(tax);
 
   // Literal type (only specific string values allowed)
   let requestStatus: "pending" | "success" | "error" = "pending";
   requestStatus = "success";
-  console.log(requestStatus);
+  // console.log(requestStatus);
 
   // Using `any` type (can be reassigned to any type)
   let notSure: any = 4;
   notSure = "maybe a string intead";
   notSure = false;
-  console.log(notSure);
+  // console.log(notSure);
 
   // Array of books and finding a specific book
   const books = ["1984", "Brave New World", "Fahrenheit 451"];
@@ -64,7 +64,7 @@ const App = () => {
   }
 
   // Safe access using optional chaining (if foundBook is defined)
-  console.log(foundBook?.length);
+  // console.log(foundBook?.length);
 
   // Union type for discount
   let discount: number | string = 20;
@@ -73,39 +73,39 @@ const App = () => {
   // Another literal type example for order status
   let orderStatus: "processing" | "shipped" | "delivered" = "processing";
   orderStatus = "shipped";
-  console.log(orderStatus, discount);
+  // console.log(orderStatus, discount);
 
   // Arrays and Objects in TypeScript
   // An array of numbers
   let prices: number[] = [100, 75, 42];
-  console.log(prices);
+  // console.log(prices);
 
   // An array of strings
   let fruits: string[] = ["apple", "banana", "cashew"];
-  console.log(fruits);
+  // console.log(fruits);
 
   // An array of any type values (not recommended unless necessary)
   let emptyValues1: any[] = ["hello", 100];
-  console.log(emptyValues1);
+  // console.log(emptyValues1);
 
   // An array with mixed types using union types
   let names = ["peter", "susan", 7, true]; // inferred as (string | number | boolean)[]
   let array: (string | number | boolean)[] = ["peter", "susan", 7, true];
-  console.log(names, array);
+  // console.log(names, array);
 
   // Only numbers allowed in this array
   let temperatures: number[] = [20, 25, 30];
   // temperatures.push('hot') ❌ Invalid: 'hot' is a string
-  console.log(temperatures);
+  // console.log(temperatures);
 
   // Only strings allowed in this array
   let colors: string[] = ["red", "green", "blue"];
   // colors.push(true) ❌ Invalid: true is a boolean
-  console.log(colors);
+  // console.log(colors);
 
   // Mixed array with numbers and strings
   let mixedArray: (string | number)[] = [1, 2, 3, "four"];
-  console.log(mixedArray);
+  // console.log(mixedArray);
 
   // An object with `brand` (string) and `year` (number)
   let car: { brand: string; year: number } = { brand: "Toyota", year: 2020 };
@@ -119,7 +119,7 @@ const App = () => {
   let book = { title: "book", cost: 20 };
   let pen = { title: "pen", cost: 10 };
   let notebook = { title: "notebook" }; // cost is optional
-  console.log(car1);
+  // console.log(car1);
 
   // Array of objects with readonly `title` and optional `cost`
   let items: { readonly title: string; cost?: number }[] = [
@@ -128,18 +128,18 @@ const App = () => {
     notebook,
   ];
   // items[0].title = 'new book' ❌ Invalid: title is readonly
-  console.log(items);
+  // console.log(items);
 
   // Object representing a bike
   let bike: { brand: string; year: number } = { brand: "yamaha", year: 2024 };
   // bike.year = 'old' ❌ Invalid: 'old' is not a number
-  console.log(bike);
+  // console.log(bike);
 
   // Another object for a laptop
   let laptop: { brand: string; year: number } = { brand: "Dell", year: 2023 };
   // laptop.brand = 4 ❌ Invalid: must be a string
   // let laptop2: { brand: string; year: number } = { brand: "HP" }; ❌ year missing
-  console.log(laptop);
+  // console.log(laptop);
 
   // Objects with optional price field
   let product1 = { title: "shirt", price: 20 };
@@ -148,14 +148,14 @@ const App = () => {
   // Array of product objects with optional `price`
   let products: { title: string; price?: number }[] = [product1, product2];
   // products.push({ title: 'shoes', price: true }) ❌ Invalid: true is not a number
-  console.log(products);
+  // console.log(products);
 
   // Functions params and function returns
   // any - you can use any to get rid of the error
   // config - you can do the same by making changes to  your config file
   // type
   function sayHi(name: string) {
-    console.log(`Hello there ${name.toUpperCase()}`);
+    // console.log(`Hello there ${name.toUpperCase()}`);
   }
 
   sayHi("John");
@@ -172,7 +172,7 @@ const App = () => {
   }
 
   const finalPrice = calculateDiscount(200);
-  console.log(finalPrice);
+  // console.log(finalPrice);
 
   // A simple function that adds 3 to the provided number
   function addThree(number: any) {
@@ -182,7 +182,7 @@ const App = () => {
 
   const result = addThree(3);
   const someValue = result;
-  console.log(someValue); // Output: 6
+  // console.log(someValue); // Output: 6
 
   // ===============================
   // Challenge: Check if name exists in array
@@ -198,9 +198,9 @@ const App = () => {
 
   // Conditional logging based on the result
   if (isNameInList(nameToCheck)) {
-    console.log(`${nameToCheck} is in the list`);
+    // console.log(`${nameToCheck} is in the list`);
   } else {
-    console.log(`${nameToCheck} is not in the list`);
+    // console.log(`${nameToCheck} is not in the list`);
   }
 
   // ===============================
@@ -213,7 +213,7 @@ const App = () => {
   }
 
   let priceAfterDiscount = calculatePrice(100, 20);
-  console.log(priceAfterDiscount);
+  // console.log(priceAfterDiscount);
 
   // ===============================
   // Default Parameters in TypeScript
@@ -230,8 +230,8 @@ const App = () => {
   let scoreAfterPenalty = calculateScore(40, 10);
   let scoreWithoutPenalty = calculateScore(400);
 
-  console.log(scoreWithoutPenalty);
-  console.log(scoreAfterPenalty);
+  // console.log(scoreWithoutPenalty);
+  // console.log(scoreAfterPenalty);
 
   // ===============================
   // Rest Parameters in TypeScript
@@ -240,7 +240,7 @@ const App = () => {
   // Accepts multiple numbers, doubles them, sums them, and returns with a message
   function sum(message: string, ...numbers: number[]): string {
     const doubled = numbers.map((num) => num * 2);
-    console.log(doubled);
+    // console.log(doubled);
     let total = numbers.reduce((prev, curr) => {
       return prev + curr;
     }, 0);
@@ -249,14 +249,14 @@ const App = () => {
   }
 
   let resultSum = sum("The total is : ", 1, 2, 3, 4, 5);
-  console.log(resultSum);
+  // console.log(resultSum);
 
   // ===============================
   // Simple Logger Function
   // ===============================
 
   function logMessage(message: string) {
-    console.log(message);
+    // console.log(message);
   }
 
   logMessage(`Hello, Typescript`);
@@ -268,9 +268,9 @@ const App = () => {
   // challenge || Accepts either a string or number and processes accordingly
   function processInput(input: string | number) {
     if (typeof input === "number") {
-      console.log(input * 2);
+      // console.log(input * 2);
     } else {
-      console.log(input.toUpperCase());
+      // console.log(input.toUpperCase());
     }
   }
 
@@ -293,7 +293,7 @@ const App = () => {
   const first = createEmployee({ id: 1 });
   const second = createEmployee({ id: 2 });
 
-  console.log(first, second);
+  // console.log(first, second);
 
   // ===============================
   // Alternative Object Handling in Functions
@@ -302,7 +302,7 @@ const App = () => {
   // Function that takes a student object with `id` and `name`
   // Logs a welcome message (in uppercase) to the console
   function createStudent(student: { id: number; name: string }): void {
-    console.log(`Welcome to the course ${student.name.toUpperCase()}!!!`);
+    // console.log(`Welcome to the course ${student.name.toUpperCase()}!!!`);
   }
 
   const newStudent = {
@@ -311,11 +311,11 @@ const App = () => {
   };
 
   // Will log the message but returns undefined (because return type is void)
-  console.log(createStudent(newStudent));
+  // console.log(createStudent(newStudent));
 
   // Uncommenting the line below would work fine, even with extra props like `email`
   // as long as the required ones (`id` and `name`) are present.
-  // console.log(createStudent({id:1, name: 'bob', email:'bobo@gmail.com'}));
+  // console.log(createStudent({ id: 1, name: "bob", email: "bobo@gmail.com" }));
 
   // ===============================
   // Challenge: Process Data Function
@@ -336,9 +336,9 @@ const App = () => {
     }
   }
 
-  console.log(processData(6));
-  console.log(processData("Bode"));
-  console.log(processData("Bode", { reverse: true }));
+  // console.log(processData(6));
+  // console.log(processData("Bode"));
+  // console.log(processData("Bode", { reverse: true }));
 
   // ===============================
   // Type Alias and User Creation Example
@@ -365,7 +365,7 @@ const App = () => {
 
   // Function that accepts a `User` object and returns a new `User` object
   function createUser(user: User): User {
-    console.log(`Hello there ${user.name.toUpperCase()}`);
+    // console.log(`Hello there ${user.name.toUpperCase()}`);
     return {
       id: user.id,
       name: String(user.name),
@@ -402,14 +402,14 @@ const App = () => {
     // Use type narrowing with the `in` operator to check if 'employees' exists
     if ("employees" in staff) {
       // If true, the staff is a Manager
-      console.log(
-        `${staff.name} is a manager with ${staff.employees.length} employees.`
-      );
+      // console.log(
+      `${staff.name} is a manager with ${staff.employees.length} employees.`;
+      // );
     } else {
       // Otherwise, the staff is a regular Employee
-      console.log(
-        `${staff.name} is an employee in the ${staff.department} department`
-      );
+      // // console.log(
+      //   `${staff.name} is an employee in the ${staff.department} department`
+      // );
     }
   }
 
@@ -435,6 +435,8 @@ const App = () => {
     price: number;
   };
 
+  type DiscountedBook = Book & { discount: number };
+
   // Create two book objects of type Book
   const book1: Book = {
     id: 1,
@@ -450,7 +452,8 @@ const App = () => {
 
   // Intersection type: Book & { discount: number }
   // This means the object must have all properties from both Book AND the discount
-  const discountedBook: Book & { discount: number } = {
+  // const discountedBook: Book & { discount: number } = {
+  const discountedBook: DiscountedBook = {
     id: 3,
     name: "Gnomes vs. Goblins: The ultimate Guide",
     price: 25,
@@ -458,7 +461,7 @@ const App = () => {
   };
 
   // Print all the book objects
-  console.log(discountedBook, book1, book2);
+  // console.log(discountedBook, book1, book2);
 
   // ===============================
   // Index Signature (Dynamic Property Names)
@@ -475,7 +478,7 @@ const App = () => {
   // Create an animal object using dynamic key assignment
   let tiger: Animal = { [propName]: 5 }; // Equivalent to { age: 5 }
 
-  console.log(tiger); // Output: { age: 5 }
+  // console.log(tiger); // Output: { age: 5 }
 
   // ===============================
   // Union Type Example
@@ -488,7 +491,7 @@ const App = () => {
 
   value = "Hello";
   value = 123;
-  console.log(value);
+  // console.log(value);
 
   // ===============================
   // Literal Type Example
@@ -502,7 +505,7 @@ const App = () => {
   theme = "dark";
   theme = "light";
 
-  console.log(theme);
+  // console.log(theme);
 
   // Function that sets the theme using the Theme literal type
   function setTheme(t: Theme) {
@@ -545,7 +548,7 @@ const App = () => {
 
     // Method implementation to print the author
     printAuthor() {
-      console.log(this.author);
+      // console.log(this.author);
     },
 
     // Method implementation to print the title with a custom message
@@ -563,7 +566,7 @@ const App = () => {
     //second option
     /** 
     printSomething: (someValue) => {
-      console.log(deepWork.author);
+      // console.log(deepWork.author);
 
       return someValue;
     },
@@ -577,7 +580,7 @@ const App = () => {
     /**
     // fourth option
     printAuthor: () => {
-      console.log(deepWork.author);
+      // console.log(deepWork.author);
     },
      */
   };
@@ -589,9 +592,9 @@ const App = () => {
 
   // Log the returned string from `printTitle()`
 
-  console.log(resultTitle);
+  // console.log(resultTitle);
   // Log the returned number from `printSomething()`
-  console.log(deepWork.printSomething(34));
+  // console.log(deepWork.printSomething(34));
   deepWork.printAuthor();
 
   // ===============================
@@ -632,10 +635,112 @@ const App = () => {
   laptopInterface.storage = 256;
 
   // Upgrade the RAM by 4 and log the new RAM value
-  console.log(laptopInterface.upgradeRam(4)); // Output: 12
+  // console.log(laptopInterface.upgradeRam(4)); // Output: 12
 
   // Log the entire object to see updated values
-  console.log(laptopInterface);
+  // console.log(laptopInterface);
+
+  interface Person {
+    name: string;
+    getDetails(): string;
+  }
+
+  interface DogOwner {
+    dogName: string;
+    getDogDetails(): string;
+  }
+
+  //Merging Interface
+  interface Person {
+    age: number;
+  }
+
+  const person: Person = {
+    name: "john",
+    age: 30,
+    getDetails() {
+      return `Name: ${this.name}, Age:${this.age}`;
+    },
+  };
+
+  // console.log(person.getDetails());
+
+  // Extending interface
+  interface EmployeeInterface extends Person {
+    employeeId: number;
+  }
+
+  const employee: EmployeeInterface = {
+    name: "jane",
+    employeeId: 123,
+    age: 28,
+    getDetails() {
+      return `Name: ${this.name}, Age:${this.age}, Employee ID: ${this.employeeId}`;
+    },
+  };
+
+  // console.log(employee.getDetails());
+
+  interface ManagerInterface extends Person, DogOwner {
+    managerPeople(): void;
+  }
+
+  const manager: ManagerInterface = {
+    name: "bob",
+    age: 24,
+    dogName: "jack",
+
+    getDetails() {
+      return `Name: ${this.name}, Age:${this.age}, Employee ID: ${this.dogName}`;
+    },
+    getDogDetails() {
+      return `Name: is ${this.dogName}`;
+    },
+    managerPeople() {
+      // console.log("managing people");
+    },
+  };
+
+  manager.managerPeople();
+
+  //Challenge
+
+  interface PersonChallenge {
+    name: string;
+  }
+
+  interface DogOwnerChallenge extends PersonChallenge {
+    dogName: string;
+  }
+
+  interface ManagerChallenge extends PersonChallenge {
+    managePeople(): void;
+    delegateTasks(): void;
+  }
+
+  function getEmployeeChallenge():
+    | PersonChallenge
+    | DogOwnerChallenge
+    | ManagerChallenge {
+    const random = Math.random();
+    // console.log(random);
+
+    if (random < 0.33) {
+      return { name: "Jake" };
+    } else if (random < 0.66) {
+      return { name: "Max", dogName: "Buddy" };
+    } else {
+      return {
+        name: "Alice",
+        // managePeople: () => console.log("Managing team"),
+        // delegateTasks: () => console.log("Delegating tasks"),
+      };
+    }
+  }
+
+  // Call the function and store the result (if you want to use it)
+  const employeeChallenge = getEmployeeChallenge();
+  console.log(employeeChallenge);
 
   return <div>App</div>;
 };
