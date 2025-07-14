@@ -915,38 +915,58 @@ const App = () => {
   // Output the user object
   // console.log(userAssert);
 
-  // Type Unknown
+  // ------------------------
+  // Type: unknown
+  // ------------------------
+
+  // `unknown` is a type-safe counterpart to `any` — you must narrow it before using
   let unknownValue: unknown;
+
+  // `unknownValue` can hold any type, but you can’t access properties or call methods on it directly
   unknownValue = [1, 2, 3];
   unknownValue = 42.33455;
+
+  // This line will cause an error because `unknownValue` might not be a number
   // unknownValue.toFixed(2)
 
+  // You must check the type before using it safely
   if (typeof unknownValue === "number") {
-    unknownValue.toFixed(2);
+    unknownValue.toFixed(2); // ✅ Safe now
   }
+
+  // ------------------------
+  // Safe Error Handling with unknown thrown errors
+  // ------------------------
 
   function runSomeCode() {
     const random = Math.random();
+
     if (random < 0.5) {
-      throw new Error("there was an error....");
+      throw new Error("there was an error...."); // Throws an Error object
     } else {
-      throw "some error";
+      throw "some error"; // Throws a string (not ideal, but possible)
     }
   }
 
   try {
     runSomeCode();
   } catch (error) {
+    // TypeScript treats error as `unknown`, so we need to narrow it
     if (error instanceof Error) {
-      console.log(error.message);
+      console.log(error.message); // ✅ Access safe Error properties
     } else {
-      console.log(error);
+      console.log(error); // ⚠️ Could be anything — string, number, etc.
     }
   }
 
-  // Type never
+  // ------------------------
+  // Type: never
+  // ------------------------
+
+  // Uncommenting this will cause an error: `never` means no value can ever be assigned
   // let someValueNever: never = 0;
 
+  // A union type with limited literal values
   type ThemeNever = "light" | "dark";
 
   function checkTheme(theme: ThemeNever): void {
@@ -959,8 +979,14 @@ const App = () => {
       console.log("dark theme");
       return;
     }
+
+    // This line enforces exhaustiveness — theme should be `never` here if all cases are handled
     theme;
   }
+
+  // ------------------------
+  // Exhaustive Checking with Enums and `never`
+  // ------------------------
 
   enum Color {
     Red,
@@ -977,16 +1003,18 @@ const App = () => {
       case Color.Green:
         return "Green";
       default:
-        //at build time
+        // At compile time, this ensures all enum members are handled
         let unexpectedColor: never = color;
-        // at run time
+
+        // At runtime, if something slips through, we throw an error
         throw new Error(`unexpected color value: ${color}`);
     }
   }
 
-  console.log(getColorName(Color.Red));
-  console.log(getColorName(Color.Blue));
-  console.log(getColorName(Color.Green));
+  // Test all defined enum values
+  // console.log(getColorName(Color.Red));
+  // console.log(getColorName(Color.Blue));
+  // console.log(getColorName(Color.Green));
 
   return <div>App</div>;
 };
