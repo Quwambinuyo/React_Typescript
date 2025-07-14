@@ -828,6 +828,93 @@ const App = () => {
 
   console.log(user);
 
+  // let phoneNo: number = 4;
+  // let randomNumber: number = Math.floor(Math.random() * (phoneNo + 1));
+  // console.log(randomNumber);
+
+  // let phoneNo: number = 4;
+  // let phoneCheck: boolean = phoneNo > 5;
+  // phoneCheck = !phoneCheck;
+  // console.log(phoneCheck);
+
+  // let orderStatuses: "processing" | "shipped" | "delivered" = "processing";
+  // console.log(orderStatuses);
+  // orderStatus = "shipped";
+  // orderStatus = "delivered";
+
+  // let anyArray: (number | string)[] = [1, 2, "hello"];
+  // console.log(anyArray);
+
+  // let carOwner: { brand: string; year: number } = {
+  //   brand: "toyota",
+  //   year: 2020,
+  // };
+  // let carOwner: { brand: string; year: number }
+  // carOwner = { brand: "toyota", year: 2020 };
+  // console.log(carOwner);
+
+  // function calculateDiscounts(price: number): number {
+  //   // price.toUpperCase();
+  //   const hasDiscount = true;
+  //   if (hasDiscount) {
+  //     return price;
+  //     // return 'Discount Applied';
+  //   }
+  //   return price * 0.9;
+  // }
+
+  // const finalPrices = calculateDiscounts(200);
+  // console.log(finalPrices);
+  // Type Assertion: Treating a value of one type as another (here from `any` to `string`)
+  let someValueAssertion: any = "this is a string";
+
+  // Using type assertion to access `length` property on a string
+  let strLength: number = (someValueAssertion as string).length;
+
+  // Define a simple type for Bird
+  type Bird = {
+    name: string;
+  };
+
+  // JSON strings (from an API or DB, typically)
+  let birdString = '{"name": "Eagle"}';
+  let dogString = '{"breed": "Dog"}';
+
+  // Parse the strings into JS objects
+  let birdObject = JSON.parse(birdString);
+  let dogObject = JSON.parse(dogString);
+
+  // Assert that parsed objects are of type Bird
+  let bird = birdObject as Bird;
+  let dog = dogObject as Bird; // ❗ Caution: dogObject does not have `name`, but we're asserting it is a Bird
+
+  // console.log(bird.name); // ✅ Safe
+  // console.log(dog.name); // ⚠️ Runtime error: 'name' is undefined
+
+  // Define an enum for user status values
+  enum Status {
+    Pending = "pending",
+    Declined = "declined",
+  }
+
+  // Define a User type with a name and status
+  type UserAssertion = {
+    name: string;
+    status: Status;
+  };
+
+  // Simulate getting a status string from a database
+  const statusValue = "pending";
+
+  // Use type assertion to treat the string as a Status enum
+  const userAssert: UserAssertion = {
+    name: "john",
+    status: statusValue as Status, // ✅ Trusted assertion: "pending" matches Status.Pending
+  };
+
+  // Output the user object
+  console.log(userAssert);
+
   return <div>App</div>;
 };
 
