@@ -732,15 +732,44 @@ const App = () => {
     } else {
       return {
         name: "Alice",
-        // managePeople: () => console.log("Managing team"),
-        // delegateTasks: () => console.log("Delegating tasks"),
+        managePeople: () => console.log("Managing team"),
+        delegateTasks: () => console.log("Delegating tasks"),
       };
     }
   }
 
   // Call the function and store the result (if you want to use it)
   const employeeChallenge = getEmployeeChallenge();
-  console.log(employeeChallenge);
+  function isManagerChallenge(
+    obj: PersonChallenge | DogOwnerChallenge | ManagerChallenge
+  ): obj is ManagerChallenge {
+    return "managePeople" in obj;
+  }
+
+  if (isManagerChallenge(employeeChallenge)) {
+    employeeChallenge.delegateTasks();
+  }
+
+  // console.log(employeeChallenge);
+  // console.log(employeeChallenge.name);
+  // console.log(isManagerChallenge(employeeChallenge));
+
+  // Tuples
+  let personTuples: [string, number] = ["john", 25];
+  // console.log(personTurples);
+  let dateTuples: [number, number, number] = [12, 17, 2001];
+  dateTuples.push(22);
+  console.log(dateTuples, personTuples);
+
+  function getPersonTurples(): [string, number] {
+    return ["john", 25];
+  }
+
+  let randomPersonTuples = getPersonTurples();
+  console.log(randomPersonTuples[0]);
+  console.log(randomPersonTuples[1]);
+
+  let susanTuples: [string, number?] = ["susan"];
 
   return <div>App</div>;
 };
