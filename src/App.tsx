@@ -732,8 +732,8 @@ const App = () => {
     } else {
       return {
         name: "Alice",
-        managePeople: () => console.log("Managing team"),
-        delegateTasks: () => console.log("Delegating tasks"),
+        // managePeople: () => console.log("Managing team"),
+        // delegateTasks: () => console.log("Delegating tasks"),
       };
     }
   }
@@ -759,17 +759,74 @@ const App = () => {
   // console.log(personTurples);
   let dateTuples: [number, number, number] = [12, 17, 2001];
   dateTuples.push(22);
-  console.log(dateTuples, personTuples);
+  // console.log(dateTuples, personTuples);
 
   function getPersonTurples(): [string, number] {
     return ["john", 25];
   }
 
   let randomPersonTuples = getPersonTurples();
-  console.log(randomPersonTuples[0]);
-  console.log(randomPersonTuples[1]);
+  // console.log(randomPersonTuples[0]);
+  // console.log(randomPersonTuples[1]);
 
   let susanTuples: [string, number?] = ["susan"];
+
+  // enum in typescript
+  enum ServerResponseStatus {
+    // Success = "success",
+    // Error = "error",
+    Success = 200,
+    Error = 500,
+  }
+
+  // console.log(ServerResponseStatus);
+  Object.values(ServerResponseStatus).forEach((value) => {
+    if (typeof value === "number") {
+      // console.log(value);
+    }
+  });
+
+  interface ServerResponse {
+    result: ServerResponseStatus;
+    data: string[];
+  }
+
+  function getServerResponse(): ServerResponse {
+    return {
+      result: ServerResponseStatus.Success,
+      data: ["first item", "second item"],
+    };
+  }
+
+  const response: ServerResponse = getServerResponse();
+  // console.log(response);
+
+  // Challenge
+  enum UserRole {
+    Admin,
+    Manager,
+    Employee,
+  }
+
+  type UserEnum = {
+    id: number;
+    name: string;
+    role: UserRole;
+    contact: [string, string];
+  };
+
+  function createUserEnum(user: UserEnum): UserEnum {
+    return user;
+  }
+
+  const user: UserEnum = createUserEnum({
+    id: 1,
+    name: "john doe",
+    role: UserRole.Admin,
+    contact: ["john@gmail.com", "123-456-789"],
+  });
+
+  console.log(user);
 
   return <div>App</div>;
 };
