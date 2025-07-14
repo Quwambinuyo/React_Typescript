@@ -886,7 +886,7 @@ const App = () => {
 
   // Assert that parsed objects are of type Bird
   let bird = birdObject as Bird;
-  let dog = dogObject as Bird; // ❗ Caution: dogObject does not have `name`, but we're asserting it is a Bird
+  let dog = dogObject as Bird; // ❗ Caution: dogObject does not have `name`, but we're asserting it as a Bird
 
   // console.log(bird.name); // ✅ Safe
   // console.log(dog.name); // ⚠️ Runtime error: 'name' is undefined
@@ -909,11 +909,84 @@ const App = () => {
   // Use type assertion to treat the string as a Status enum
   const userAssert: UserAssertion = {
     name: "john",
-    status: statusValue as Status, // ✅ Trusted assertion: "pending" matches Status.Pending
+    status: statusValue as Status,
   };
 
   // Output the user object
-  console.log(userAssert);
+  // console.log(userAssert);
+
+  // Type Unknown
+  let unknownValue: unknown;
+  unknownValue = [1, 2, 3];
+  unknownValue = 42.33455;
+  // unknownValue.toFixed(2)
+
+  if (typeof unknownValue === "number") {
+    unknownValue.toFixed(2);
+  }
+
+  function runSomeCode() {
+    const random = Math.random();
+    if (random < 0.5) {
+      throw new Error("there was an error....");
+    } else {
+      throw "some error";
+    }
+  }
+
+  try {
+    runSomeCode();
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    } else {
+      console.log(error);
+    }
+  }
+
+  // Type never
+  // let someValueNever: never = 0;
+
+  type ThemeNever = "light" | "dark";
+
+  function checkTheme(theme: ThemeNever): void {
+    if (theme === "light") {
+      console.log("light theme");
+      return;
+    }
+
+    if (theme === "dark") {
+      console.log("dark theme");
+      return;
+    }
+    theme;
+  }
+
+  enum Color {
+    Red,
+    Blue,
+    Green,
+  }
+
+  function getColorName(color: Color) {
+    switch (color) {
+      case Color.Red:
+        return "Red";
+      case Color.Blue:
+        return "Blue";
+      case Color.Green:
+        return "Green";
+      default:
+        //at build time
+        let unexpectedColor: never = color;
+        // at run time
+        throw new Error(`unexpected color value: ${color}`);
+    }
+  }
+
+  console.log(getColorName(Color.Red));
+  console.log(getColorName(Color.Blue));
+  console.log(getColorName(Color.Green));
 
   return <div>App</div>;
 };
