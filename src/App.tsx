@@ -1016,28 +1016,60 @@ const App = () => {
   // console.log(getColorName(Color.Blue));
   // console.log(getColorName(Color.Green));
 
-  //Type Guarding
+  // ------------------------
+  // Type Guarding with typeof
+  // ------------------------
+
+  // Union type that could be a string, number, or boolean
   type valueType = string | number | boolean;
 
   let valueGuard: valueType;
+
+  // Randomly assign a value: string, number, or boolean
   const random = Math.random();
   valueGuard = random < 0.33 ? "hello" : random < 0.66 ? 123.456 : true;
 
+  // Function to check the type of value at runtime using typeof
   function checkValue(value: valueType): void {
     if (typeof value === "string") {
+      // If the value is a string, convert to lowercase
       // console.log(value.toLowerCase());
       return;
     }
+
     if (typeof value === "number") {
+      // If it's a number, format to 2 decimal places
       console.log(value.toFixed(2));
       return;
     }
+
+    // If it's a boolean, log it as a boolean
     // console.log(`boolean : ${value}`);
   }
 
   // checkValue(valueGuard);
 
-  // Equality narrowing
+  // ------------------------
+  // Equality Narrowing with Discriminated Unions
+  // ------------------------
+
+  // Dog and Cat types with a shared 'type' property (discriminant)
+  type Dog = { type: "dog"; name: string; bark: () => void };
+  type Cat = { type: "cat"; name: string; meow: () => void };
+  type AnimalNarr = Dog | Cat;
+
+  // Type narrowing using equality check on the 'type' property
+  function makeSound(animal: AnimalNarr) {
+    if (animal.type === "dog") {
+      // TypeScript now knows `animal` is a Dog
+      animal.bark();
+    } else {
+      // Otherwise, it's a Cat
+      animal.meow();
+    }
+  }
+
+  // instance of type guard
 
   return <div>App</div>;
 };
