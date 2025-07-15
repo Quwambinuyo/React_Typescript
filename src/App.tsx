@@ -883,6 +883,7 @@ const App = () => {
   // Parse the strings into JS objects
   let birdObject = JSON.parse(birdString);
   let dogObject = JSON.parse(dogString);
+  // console.log(dogObject);
 
   // Assert that parsed objects are of type Bird
   let bird = birdObject as Bird;
@@ -911,6 +912,7 @@ const App = () => {
     name: "john",
     status: statusValue as Status,
   };
+  // console.log(userAssert.status);
 
   // Output the user object
   // console.log(userAssert);
@@ -933,7 +935,9 @@ const App = () => {
   if (typeof unknownValue === "number") {
     unknownValue.toFixed(2); // ✅ Safe now
   }
-
+  // if (Array.isArray(unknownValue)) {
+  //   console.log("yes it is an array");
+  // }
   // ------------------------
   // Safe Error Handling with unknown thrown errors
   // ------------------------
@@ -984,6 +988,8 @@ const App = () => {
     theme;
   }
 
+  // checkTheme("light");
+
   // ------------------------
   // Exhaustive Checking with Enums and `never`
   // ------------------------
@@ -1027,7 +1033,7 @@ const App = () => {
 
   // Randomly assign a value: string, number, or boolean
   const random = Math.random();
-  valueGuard = random < 0.33 ? "hello" : random < 0.66 ? 123.456 : true;
+  valueGuard = random < 0.33 ? "Hello" : random < 0.66 ? 123.456 : true;
 
   // Function to check the type of value at runtime using typeof
   function checkValue(value: valueType): void {
@@ -1039,7 +1045,7 @@ const App = () => {
 
     if (typeof value === "number") {
       // If it's a number, format to 2 decimal places
-      console.log(value.toFixed(2));
+      // console.log(value.toFixed(2));
       return;
     }
 
@@ -1068,6 +1074,33 @@ const App = () => {
       animal.meow();
     }
   }
+
+  // // 1. Define Dog and Cat types
+  // type Dog = { type: "dog"; name: string; bark: () => void };
+  // type Cat = { type: "cat"; name: string; meow: () => void };
+
+  // // 2. Union type
+  // type AnimalNarr = Dog | Cat;
+
+  // // 3. Function that handles either Dog or Cat
+  // function makeSound(animal: AnimalNarr) {
+  //   console.log(`this is the type: ${animal.type}`);
+  //   if (animal.type === "dog") {
+  //     animal.bark();
+  //   } else {
+  //     animal.meow();
+  //   }
+  // }
+
+  // // 4. Create a dog object
+  // const dog: Dog = {
+  //   type: "dog",
+  //   name: "Spike",
+  //   bark: () => console.log("Woof!"),
+  // };
+
+  // // 5. Call the function
+  // makeSound(dog);
 
   // ------------------------
   // instanceof Type Guard: Error Handling Example
