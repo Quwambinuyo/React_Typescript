@@ -826,7 +826,7 @@ const App = () => {
     contact: ["john@gmail.com", "123-456-789"],
   });
 
-  console.log(user);
+  // console.log(user);
 
   // let phoneNo: number = 4;
   // let randomNumber: number = Math.floor(Math.random() * (phoneNo + 1));
@@ -953,9 +953,9 @@ const App = () => {
   } catch (error) {
     // TypeScript treats error as `unknown`, so we need to narrow it
     if (error instanceof Error) {
-      console.log(error.message); // ✅ Access safe Error properties
+      // console.log(error.message); // ✅ Access safe Error properties
     } else {
-      console.log(error); // ⚠️ Could be anything — string, number, etc.
+      // console.log(error); // ⚠️ Could be anything — string, number, etc.
     }
   }
 
@@ -971,12 +971,12 @@ const App = () => {
 
   function checkTheme(theme: ThemeNever): void {
     if (theme === "light") {
-      console.log("light theme");
+      // console.log("light theme");
       return;
     }
 
     if (theme === "dark") {
-      console.log("dark theme");
+      // console.log("dark theme");
       return;
     }
 
@@ -1015,6 +1015,29 @@ const App = () => {
   // console.log(getColorName(Color.Red));
   // console.log(getColorName(Color.Blue));
   // console.log(getColorName(Color.Green));
+
+  //Type Guarding
+  type valueType = string | number | boolean;
+
+  let valueGuard: valueType;
+  const random = Math.random();
+  valueGuard = random < 0.33 ? "hello" : random < 0.66 ? 123.456 : true;
+
+  function checkValue(value: valueType): void {
+    if (typeof value === "string") {
+      // console.log(value.toLowerCase());
+      return;
+    }
+    if (typeof value === "number") {
+      console.log(value.toFixed(2));
+      return;
+    }
+    // console.log(`boolean : ${value}`);
+  }
+
+  // checkValue(valueGuard);
+
+  // Equality narrowing
 
   return <div>App</div>;
 };
