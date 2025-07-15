@@ -1109,9 +1109,53 @@ const App = () => {
 
   // Testing the function with a string input
   const randomDate = checkInput("2020-05-05");
-  // Output results
-  console.log(year); // Example: "2025"
-  console.log(randomDate); // "2020-05-05"
+
+  // console.log(year);
+  // console.log(randomDate);
+
+  // ------------------------
+  // Challenge: Discriminated Union + Exhaustive Check using `never`
+  // ------------------------
+
+  // Two action types with a discriminating `type` field
+  type IncreamentAction = {
+    type: "increment";
+    amount: number;
+    timestamp: number;
+    user: string;
+  };
+
+  type DecreamentAction = {
+    type: "decrement";
+    amount: number;
+    timestamp: number;
+    user: string;
+  };
+
+  // Union of all possible actions
+  type ActionDisc = IncreamentAction | DecreamentAction;
+
+  // A reducer function to handle state changes based on the action
+  function reducer(state: number, action: ActionDisc) {
+    switch (action.type) {
+      case "increment":
+        return state + action.amount; // ✅ Handles increment case
+      case "decrement":
+        return state - action.amount; // ✅ Handles decrement case
+      default:
+        // 🔴 If a new action is added and not handled above, this triggers a compile-time error
+        const unexpectedAction: never = action;
+        throw new Error(`Unexpected action : ${unexpectedAction}`);
+    }
+  }
+
+  // Using the reducer with a valid increment action
+  const newState = reducer(15, {
+    user: "john",
+    type: "increment",
+    amount: 5,
+    timestamp: 123456,
+  });
 
   return <div>App</div>;
 };
