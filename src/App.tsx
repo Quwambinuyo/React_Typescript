@@ -1069,7 +1069,49 @@ const App = () => {
     }
   }
 
-  // instance of type guard
+  // ------------------------
+  // instanceof Type Guard: Error Handling Example
+  // ------------------------
+
+  // This demonstrates how to safely check if an error is an actual Error object
+  // using `instanceof` inside a try/catch block
+
+  // try {
+  //   throw new Error("This is an error");
+  // } catch (error) {
+  //   // TypeScript treats caught errors as `unknown`
+  //   // So we must narrow it using `instanceof Error`
+  //   if (error instanceof Error) {
+  //     console.log(`Caught an Error Object : ${error.message}`); // ✅ Safe to access `message`
+  //   } else {
+  //     console.log("unknown error..."); // Could be anything (e.g., string)
+  //   }
+  // }
+
+  // ------------------------
+  // instanceof Type Guard: Date vs String
+  // ------------------------
+
+  // Function accepts either a Date object or a string
+  function checkInput(input: Date | string): string {
+    // Use instanceof to check if the input is a Date object
+    if (input instanceof Date) {
+      // If it's a Date, extract the year and return as string
+      return input.getFullYear().toString();
+    }
+
+    // Otherwise, it's a string, return as-is
+    return input;
+  }
+
+  // Testing the function with a Date object
+  const year = checkInput(new Date());
+
+  // Testing the function with a string input
+  const randomDate = checkInput("2020-05-05");
+  // Output results
+  console.log(year); // Example: "2025"
+  console.log(randomDate); // "2020-05-05"
 
   return <div>App</div>;
 };
