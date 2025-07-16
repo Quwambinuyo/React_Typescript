@@ -10,6 +10,7 @@ const App = () => {
   let amount: number = 20;
   amount = 12 - 5;
   // console.log(amount);
+
   // Boolean variable example
   let isAwesome: boolean = true;
   isAwesome = false;
@@ -21,6 +22,7 @@ const App = () => {
   let isNubmber2: number = 40;
   let isNumber3: number = isNubmber2 / isNumber1;
   // console.log(isNumber3);
+
   // Working with string methods
   let isString1: string = "Hello ";
   let isString2: string = "World";
@@ -89,7 +91,7 @@ const App = () => {
   // console.log(emptyValues1);
 
   // An array with mixed types using union types
-  let names = ["peter", "susan", 7, true]; // inferred as (string | number | boolean)[]
+  let names = ["peter", "susan", 7, true];
   let array: (string | number | boolean)[] = ["peter", "susan", 7, true];
   // console.log(names, array);
 
@@ -287,13 +289,14 @@ const App = () => {
     id: number;
     isActive: boolean;
   } {
+    // calculate if the remainder of id is equals to 0 to return isActive as a true else false
     return { id, isActive: id % 2 === 0 };
   }
 
   const first = createEmployee({ id: 1 });
   const second = createEmployee({ id: 2 });
 
-  // console.log(first, second);
+  console.log(first, second);
 
   // ===============================
   // Alternative Object Handling in Functions
@@ -1189,6 +1192,46 @@ const App = () => {
     amount: 5,
     timestamp: 123456,
   });
+
+  // Generics
+  // let array1: string[] = ["Apple", "Banana", "Mango"];
+  // let array2: number[] = [1, 2, 3];
+  // let array3: boolean[] = [true, false, true];
+
+  // let array1: Array<string> = ["Apple", "Banana", "Mango"];
+
+  // function createString(arg: string): string {
+  //   return arg;
+  // }
+  // function createNumber(arg: number): number {
+  //   return arg;
+  // }
+
+  function genericFunction<T>(arg: T): T {
+    return arg;
+  }
+
+  const someStringValue = genericFunction<string>("Hello World");
+  const someNumberValue = genericFunction<number>(7);
+  const someBoolValue = genericFunction<boolean>(7 < 6);
+
+  interface GenericInterface<T> {
+    value: T;
+    getValue: () => T;
+  }
+
+  const genericString: GenericInterface<string> = {
+    value: "Hello World",
+    getValue() {
+      return this.value;
+    },
+  };
+
+  async function someFunc(): Promise<string> {
+    return "hello world";
+  }
+
+  const resultGen = someFunc();
 
   return <div>App</div>;
 };
