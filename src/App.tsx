@@ -296,7 +296,7 @@ const App = () => {
   const first = createEmployee({ id: 1 });
   const second = createEmployee({ id: 2 });
 
-  console.log(first, second);
+  // console.log(first, second);
 
   // ===============================
   // Alternative Object Handling in Functions
@@ -1192,14 +1192,17 @@ const App = () => {
     amount: 5,
     timestamp: 123456,
   });
+  // GENERICS IN TYPESCRIPT
 
-  // Generics
+  // ❌ Specific typed arrays (repetitive approach)
   // let array1: string[] = ["Apple", "Banana", "Mango"];
   // let array2: number[] = [1, 2, 3];
   // let array3: boolean[] = [true, false, true];
 
+  // ✅ More generic syntax for arrays using Array<T>
   // let array1: Array<string> = ["Apple", "Banana", "Mango"];
 
+  // ❌ Non-generic, repetitive function approach
   // function createString(arg: string): string {
   //   return arg;
   // }
@@ -1207,19 +1210,23 @@ const App = () => {
   //   return arg;
   // }
 
+  // ✅ Generic function — reusable for any type
   function genericFunction<T>(arg: T): T {
     return arg;
   }
 
+  // Using the generic function with different types
   const someStringValue = genericFunction<string>("Hello World");
   const someNumberValue = genericFunction<number>(7);
   const someBoolValue = genericFunction<boolean>(7 < 6);
 
+  // ✅ Generic interface — allows a flexible type for properties and methods
   interface GenericInterface<T> {
     value: T;
     getValue: () => T;
   }
 
+  // Using the generic interface with a string type
   const genericString: GenericInterface<string> = {
     value: "Hello World",
     getValue() {
@@ -1227,11 +1234,58 @@ const App = () => {
     },
   };
 
+  // ✅ Promise with a generic return type
   async function someFunc(): Promise<string> {
     return "hello world";
   }
+  const resultGen = someFunc(); // resultGen is of type Promise<string>
 
-  const resultGen = someFunc();
+  // ❌ Non-generic version of array creation
+  function generateStringArray(length: number, value: string): string[] {
+    let result: string[] = [];
+    result = Array(length).fill(value);
+    return result;
+  }
+
+  // ✅ Generic array creation function — reusable for any type
+  function createArray<T>(length: number, value: T): Array<T> {
+    let result: T[] = [];
+    result = Array(length).fill(value);
+    return result;
+  }
+
+  // Creating string and number arrays using the generic function
+  let arrayStrings = createArray<string>(10, "Happy");
+  let arrayNumbers = createArray<number>(10, 7);
+
+  // ✅ Generics with multiple type variables (tuple return)
+  function pair<T, U>(param1: T, param2: U): [T, U] {
+    return [param1, param2];
+  }
+  let resultMultipleV = pair<number, string>(123, "hello"); // returns [123, "hello"]
+
+  // ✅ Generics with type constraint (only string or number allowed)
+  function processValue<T extends string | number>(value: T): T {
+    return value;
+  }
+  processValue("hello"); // valid
+  processValue(6); // valid
+  // processValue(true); // ❌ invalid — boolean not allowed
+
+  // ✅ Interface with default generic type (T defaults to `any` if not provided)
+  interface StoreData<T = any> {
+    data: T[];
+  }
+
+  // Specifying number type explicitly
+  const storeNumbers: StoreData<number> = {
+    data: [1, 2, 3, 4],
+  };
+
+  // Using default generic type (T = any) — allows mixed types
+  const randomStuff: StoreData = {
+    data: ["random", 1],
+  };
 
   return <div>App</div>;
 };
