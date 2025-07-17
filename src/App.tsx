@@ -1,3 +1,6 @@
+import { z } from "zod";
+import React, { useEffect, useState } from "react";
+
 const App = () => {
   // Declaring a string variable and modifying it
   let awesomeName: string = "Shake and Bake";
@@ -1286,8 +1289,82 @@ const App = () => {
   const randomStuff: StoreData = {
     data: ["random", 1],
   };
+  // ✅ Import zod at the top of your file
+  // import { z } from "zod";
 
-  return <div>App</div>;
+  // ✅ Define the API endpoint
+  const url = "https://www.course-api.com/react-tours-project";
+
+  // ✅ Define a Zod schema to validate the structure of each tour object
+  const tourSchema = z.object({
+    id: z.string(), // ID must be a string
+    name: z.string(), // Name must be a string
+    info: z.string(), // Info/description must be a string
+    image: z.string(), // Image URL must be a string
+    price: z.string(), // Price must be a string
+  });
+
+  // ✅ Infer the TypeScript type from the Zod schema
+  type Tour = z.infer<typeof tourSchema>;
+
+  // ✅ Fetch data from the API and validate it using Zod
+  async function fetchData(url: string): Promise<Tour[]> {
+    try {
+      // Send HTTP GET request
+      const response = await fetch(url);
+
+      // If the request fails, throw an error
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Parse the JSON response into raw data
+      const rawData: Tour[] = await response.json();
+
+      // Use Zod to validate the array of tour objects
+      const result = tourSchema.array().safeParse(rawData);
+      console.log(result); // Log result for debugging
+
+      // If validation fails, throw an error with details
+      if (!result.success) {
+        throw new Error(`invalid data: ${result.error}`);
+      }
+      return result.data;
+    } catch (error) {
+      // Handle errors: log and return empty array
+      const errorMsg =
+        error instanceof Error ? error.message : "there was an error!...";
+      // console.log(errorMsg); // Optional debug log
+      return [];
+    }
+  }
+
+  const [tours, setTours] = useState<Tour[]>([]);
+
+  useEffect(() => {
+    const getTours = async () => {
+      const data = await fetchData(url);
+      setTours(data);
+    };
+    getTours();
+  }, []);
+
+  return (
+    <div>
+      {tours.map((tour) => {
+        // console.log(tour);
+
+        return (
+          <div key={tour.id}>
+            <h2>{tour.name}</h2>
+            {/* <p>{tour.info}</p> */}
+            {/* <p>${tour.price}</p> */}
+            {/* <img src={tour.image} alt={tour.name} width="200" /> */}
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default App;
